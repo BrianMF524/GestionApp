@@ -13,19 +13,19 @@ public class EmpleadoServicio {
     @Autowired
     private EmpleadoRepo empleadoRepo;
     //Metodos de empleado
-    private Empleado registrarEmpleado(Empleado e){
+    public Empleado registrarEmpleado(Empleado e){
         return empleadoRepo.save(e);
     }
-    private List<Empleado> traerEmpleados(){
+    public  List<Empleado> traerEmpleados(){
         return empleadoRepo.findAll();
     }
-    private Optional<Empleado> buscarEmpleado(long id){
+    public  Optional<Empleado> buscarEmpleado(long id){
         return empleadoRepo.findById(id);
     }
-    private void borrarEmpleado(Long id){
+    public  void borrarEmpleado(Long id){
         empleadoRepo.deleteById(id);
     }
-    private Empleado actualizarEmpleado(Empleado empleadoActualizado,long id){
+    public  Empleado actualizarEmpleado(Empleado empleadoActualizado,long id){
         Optional<Empleado> aux= buscarEmpleado(id);
         if (aux.isEmpty()){
             throw new RuntimeException("Error al editar empleado");

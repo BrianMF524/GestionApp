@@ -39,8 +39,10 @@ public class EmpleadoController {
     }
 
     @GetMapping("/empleados/{id}")
-    private Optional<Empleado> traerEmpleado(@PathVariable long id){
-        return empleadoServicio.buscarEmpleado(id);
+    private String traerEmpleado(@PathVariable long id, Model model){
+        //return empleadoServicio.buscarEmpleado(id);
+        model.addAttribute(empleadoServicio.buscarEmpleado(id).get());
+        return "detalle-empleado";
     }
 
     @GetMapping("/empleados/nuevo")

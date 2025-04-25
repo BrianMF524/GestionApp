@@ -19,6 +19,7 @@
     </thead>
     <tbody>
     <tr th:each="empleado : ${empleadosPage.content}">
+
         <td th:text="${empleado.id}"></td>
         <td th:text="${empleado.nombre}"></td>
         <td th:text="${empleado.apellido}"></td>
@@ -26,6 +27,7 @@
         <td th:text="${empleado.puesto}"></td>
         <td th:text="${empleado.salario}"></td>
         <td>
+            <a th:href="@{/empleados/{id}(id=${empleado.id})}" class="btn btn-primary">Detalles</a>
             <a th:href="@{/empleados/{id}/editar(id=${empleado.id})}" class="btn btn-primary">Editar</a>
             <a th:href="@{/empleados/{id}/eliminar(id=${empleado.id})}" class="btn btn-danger">Eliminar</a>
         </td>

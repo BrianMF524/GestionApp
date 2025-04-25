@@ -5,6 +5,18 @@
     <title>crear-empleado</title>
 </head>
 <body>
-
+<form action="/empleados/agregar" method="post">
+    <label>Nombre</label>
+    <input type="text" name="nombre" /><br />
+    <label>Apellido</label>
+    <input type="text" name="apellido" /><br />
+    <label>Puesto</label>
+    <input type="text" name="puesto" /><br />
+    <label>Email</label>
+    <input type="email" name="email" /><br />
+    <label>Salario</label>
+    <input type="number" name="salario" /><br />
+    <button type="submit">Guardar</button>
+</form>
 </body>
 </html>

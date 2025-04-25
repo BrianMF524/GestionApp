@@ -1,11 +1,16 @@
 package com.example.GestionApp.Controller;
 
 import com.example.GestionApp.Models.Empleado;
+import com.example.GestionApp.Repo.EmpleadoRepo;
 import com.example.GestionApp.Service.EmpleadoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,15 +20,28 @@ import java.util.Optional;
 public class EmpleadoController {
     @Autowired
     private EmpleadoServicio empleadoServicio;
+    @Autowired
+    private EmpleadoRepo empleadoRepo;
 
     @GetMapping("/")
     public String inicio() {
         return "index"; // Debe coincidir con index.html
     }
 
-    @GetMapping("/empleados")
+    // METODO SIN PAGINACION
+    /*@GetMapping("/empleados")
     private String listarEmpleados(Model model){
         model.addAttribute("empleados",empleadoServicio.traerEmpleados());
+        return "empleados";
+    }*/
+    @GetMapping("/empleados")
+    private String listarEmpleados(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size, Model model){
+        Pageable pageable= PageRequest.of(page,size, Sort.by("nombre").ascending());
+        Page<Empleado> empleadoPage=empleadoRepo.findAll(pageable);
+        model.addAttribute("empleadosPage",empleadoPage);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("totalPages",empleadoPage.getTotalPages());
+        model.addAttribute("totalItems",empleadoPage.getTotalElements());
         return "empleados";
     }
 
@@ -40,6 +58,7 @@ public class EmpleadoController {
 
     @PostMapping("/empleados/agregar")
     private String agregarEmpleado(@ModelAttribute("empleado") Empleado e){
+        System.out.println("Prueba empleado"+e.getNombre()+" "+e.getApellido());
         empleadoServicio.registrarEmpleado(e);
         return "redirect:/empleados";
     }
@@ -50,7 +69,7 @@ public class EmpleadoController {
         return "editar-empleado";
     }
 
-    @DeleteMapping("/empleados/{id}/eliminar")
+    @GetMapping("/empleados/{id}/eliminar")
     private String eliminarEmpleado(@PathVariable long id){
         empleadoServicio.borrarEmpleado(id);
         return "redirect:/empleados";

@@ -33,6 +33,7 @@ public class EmpleadoServicio {
         aux.get().setNombre(empleadoActualizado.getNombre());
         aux.get().setApellido(empleadoActualizado.getApellido());
         aux.get().setEmail(empleadoActualizado.getEmail());
+        aux.get().setPuesto(empleadoActualizado.getPuesto());
         aux.get().setSalario(empleadoActualizado.getSalario());
         return empleadoRepo.save(aux.get());
     }

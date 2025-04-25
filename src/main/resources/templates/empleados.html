@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments.html :: bootstrap">
     <title>Lista de Empleados</title>
 </head>
-<body>
+<body class="container mt-4">
 <h1>Lista de Empleados</h1>
-<table>
+<table class="table table-striped">
     <thead>
     <tr>
         <th>ID</th>
@@ -26,8 +26,8 @@
         <td th:text="${empleado.puesto}"></td>
         <td th:text="${empleado.salario}"></td>
         <td>
-            <a th:href="@{/empleados/{id}/editar(id=${empleado.id})}">Editar</a>
-            <a th:href="@{/empleados/{id}/eliminar(id=${empleado.id})}">Eliminar</a>
+            <a th:href="@{/empleados/{id}/editar(id=${empleado.id})}" class="btn btn-primary">Editar</a>
+            <a th:href="@{/empleados/{id}/eliminar(id=${empleado.id})}" class="btn btn-danger">Eliminar</a>
         </td>
     </tr>
     </tbody>
@@ -38,21 +38,22 @@
 
     <ul>
         <li th:if="${currentPage > 0}">
-            <a th:href="@{/empleados(page=${currentPage - 1})}">Anterior</a>
+            <a th:href="@{/empleados(page=${currentPage - 1})}" class="btn btn-secondary btn-sm">Anterior</a>
         </li>
 
         <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
             <a th:href="@{/empleados(page=${i})}"
                th:text="${i + 1}"
-               th:classappend="${i == currentPage} ? 'active' : ''">
+               th:classappend="${i == currentPage} ? 'active' : ''"
+               class="btn btn-secondary btn-sm">
             </a>
         </li>
 
         <li th:if="${currentPage < totalPages - 1}">
-            <a th:href="@{/empleados(page=${currentPage + 1})}">Siguiente</a>
+            <a th:href="@{/empleados(page=${currentPage + 1})}" class="btn btn-secondary btn-sm">Siguiente</a>
         </li>
     </ul>
 </div>
-<a th:href="@{/empleados/nuevo}">Crear Nuevo Empleado</a>
+<a th:href="@{/empleados/nuevo}" class="btn btn-primary btn-sm">Crear Nuevo Empleado</a>
 </body>
 </html>

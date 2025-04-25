@@ -27,13 +27,6 @@ public class EmpleadoController {
     public String inicio() {
         return "index"; // Debe coincidir con index.html
     }
-
-    // METODO SIN PAGINACION
-    /*@GetMapping("/empleados")
-    private String listarEmpleados(Model model){
-        model.addAttribute("empleados",empleadoServicio.traerEmpleados());
-        return "empleados";
-    }*/
     @GetMapping("/empleados")
     private String listarEmpleados(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size, Model model){
         Pageable pageable= PageRequest.of(page,size, Sort.by("nombre").ascending());
@@ -84,20 +77,5 @@ public class EmpleadoController {
         model.addAttribute("error",ex.getMessage());
         return "error";
     }
-
-    /*@PutMapping("/empleados/{id}/editar")
-    private Empleado editarEmpleado(@RequestBody Empleado e,@PathVariable long id){
-        return empleadoServicio.actualizarEmpleado(e,id);
-    }
-
-
-    @PostMapping("/empleados/agregar")
-    private Empleado agregarEmpleado(@RequestBody Empleado e){
-        return empleadoServicio.registrarEmpleado(e);
-    }
-    @DeleteMapping("/empleados/{id}/delete")
-    private void borrarEmpleado(@PathVariable long id){
-        empleadoServicio.borrarEmpleado(id);
-    }*/
 
 }

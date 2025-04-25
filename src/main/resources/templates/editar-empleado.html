@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments.html :: bootstrap">
     <meta charset="UTF-8">
     <title>editar-empleado</title>
 </head>
-<body>
-<form th:action="@{/empleados/{id}/editar(id=${empleado.id})}" th:object="${empleado}" method="post">
+<body class="container mt-4">
+<form th:action="@{/empleados/{id}/editar(id=${empleado.id})}" th:object="${empleado}" method="post" >
     <input type="hidden" th:field="*{id}" />
 
+    <div class="form-group">
     <label>Nombre:</label>
-    <input type="text" th:field="*{nombre}" /><br/>
+    <input type="text" th:field="*{nombre}" class="form-control" /><br/>
+    </div>
 
     <label>Apellido:</label>
-    <input type="text" th:field="*{apellido}" /><br/>
+    <input type="text" th:field="*{apellido}" class="form-control" /><br/>
 
     <label>Puesto:</label>
-    <input type="text" th:field="*{puesto}" /><br/>
+    <input type="text" th:field="*{puesto}" class="form-control" /><br/>
 
     <label>Email:</label>
-    <input type="email" th:field="*{email}" /><br/>
+    <input type="email" th:field="*{email}" placeholder="name@example.com" class="form-control"/><br/>
 
     <label>Salario:</label>
-    <input type="number" th:field="*{salario}" /><br/>
+    <input type="number" th:field="*{salario}" class="form-control"/><br/>
 
-    <button type="submit">Guardar cambios</button>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
 </form>
 </body>
 </html>

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: bootstrap">
     <meta charset="UTF-8">
     <title>crear-empleado</title>
 </head>
-<body>
-<form action="/empleados/agregar" method="post">
+<body class="container mt-4">
+<form action="/empleados/agregar" method="post" class="form-group">
     <label>Nombre</label>
-    <input type="text" name="nombre" /><br />
+    <input type="text" name="nombre" class="form-control"/><br />
     <label>Apellido</label>
-    <input type="text" name="apellido" /><br />
+    <input type="text" name="apellido" class="form-control"/><br />
     <label>Puesto</label>
-    <input type="text" name="puesto" /><br />
+    <input type="text" name="puesto" class="form-control"/><br />
     <label>Email</label>
-    <input type="email" name="email" /><br />
+    <input type="email" name="email" class="form-control" placeholder="name@example.com"/><br />
     <label>Salario</label>
-    <input type="number" name="salario" /><br />
-    <button type="submit">Guardar</button>
+    <input type="number" name="salario" class="form-control"/><br />
+    <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <title>crear-empleado</title>
 </head>
 <body class="container mt-4">
-<form action="/empleados/agregar" method="post" class="form-group">
+<form th:action="@{/empleados/agregar}" method="post"  class="form-group">
     <label>Nombre</label>
     <input type="text" name="nombre" class="form-control"/><br />
     <label>Apellido</label>

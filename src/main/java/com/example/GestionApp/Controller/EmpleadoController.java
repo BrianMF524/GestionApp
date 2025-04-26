@@ -25,7 +25,7 @@ public class EmpleadoController {
 
     @GetMapping("/")
     public String inicio() {
-        return "index"; // Debe coincidir con index.html
+        return "empleados";
     }
     @GetMapping("/empleados")
     private String listarEmpleados(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "10") int size, Model model){
@@ -53,7 +53,7 @@ public class EmpleadoController {
 
     @PostMapping("/empleados/agregar")
     private String agregarEmpleado(@ModelAttribute("empleado") Empleado e){
-        System.out.println("Prueba empleado"+e.getNombre()+" "+e.getApellido());
+        System.out.println(e.getApellido());
         empleadoServicio.registrarEmpleado(e);
         return "redirect:/empleados";
     }
@@ -65,6 +65,11 @@ public class EmpleadoController {
     }
 
     @GetMapping("/empleados/{id}/eliminar")
+    private String formularioEliminadoEmpleado(@PathVariable long id,Model model){
+        model.addAttribute("empleado",empleadoServicio.buscarEmpleado(id).get());
+        return "eliminar-empleado";
+    }
+    @PostMapping("/empleados/{id}/eliminar/confirmar")
     private String eliminarEmpleado(@PathVariable long id){
         empleadoServicio.borrarEmpleado(id);
         return "redirect:/empleados";
